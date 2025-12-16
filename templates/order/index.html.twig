@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Commandes{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Mes Commandes</h1>
+
+    {% if orders is empty %}
+        <div class="alert alert-info">
+            Vous n'avez pas encore passé de commande. 
+            <a href="{{ path('app_home') }}">Allez faire un tour dans la boutique !</a>
+        </div>
+    {% else %}
+        <div class="accordion" id="ordersAccordion">
+            {% for order in orders %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{ order.id }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ order.id }}">
+                            <strong>Commande n°{{ order.reference }}</strong> 
+                            <span class="ms-3 badge bg-secondary">{{ order.createdAt|date('d/m/Y H:i') }}</span>
+                            <span class="ms-3 badge bg-success">{{ order.status }}</span>
+                        </button>
+                    </h2>
+                    <div id="collapse{{ order.id }}" class="accordion-collapse collapse" data-bs-parent="#ordersAccordion">
+                        <div class="accordion-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Prix</th>
+                                        <th>Quantité</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set totalOrder = 0 %}
+                                    {% for item in order.orderItems %}
+                                        <tr>
+                                            <td>{{ item.product.name }}</td>
+                                            <td>{{ item.price }} €</td>
+                                            <td>{{ item.quantity }}</td>
+                                            <td>{{ item.price * item.quantity }} €</td>
+                                        </tr>
+                                        {% set totalOrder = totalOrder + (item.price * item.quantity) %}
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-end"><strong>Total :</strong></td>
+                                        <td><strong>{{ totalOrder }} €</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
