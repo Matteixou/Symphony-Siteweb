@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Votre Panier</h1>
+
+    {% if items | length > 0 %}
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix unitaire</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.price }} €</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.price * item.quantity }} €</td>
+                    <td>
+                        <a href="{{ path('app_cart_remove', {'id': item.product.id}) }}" class="btn btn-danger btn-sm">
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end"><strong>Total Global :</strong></td>
+                    <td colspan="2"><strong>{{ total }} €</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <div class="mt-4">
+            <a href="{{ path('app_home') }}" class="btn btn-secondary">Continuer mes achats</a>
+            <button class="btn btn-success">Payer</button>
+        </div>
+    {% else %}
+        <div class="alert alert-info mt-3">
+            Votre panier est vide.
+            <br>
+            <a href="{{ path('app_home') }}" class="btn btn-primary mt-2">Retourner à la boutique</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
