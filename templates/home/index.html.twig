@@ -1,33 +1,121 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - Mon E-shop{% endblock %}
+{% block title %}Accueil - Mon E‑Shop{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h1 class="mb-4 text-center">Nos Nouveautés</h1>
+    {# Carrousel héro plein écran de largeur #}
+    <div id="homeCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
 
-    <div class="row">
-        {% for product in products %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <!-- Image fictive pour l'instant -->
-                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
-                        <span class="text-muted">{{ product.image ? product.image : 'Photo' }}</span>
-                    </div>
-                    
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text text-truncate">{{ product.description }}</p>
-                        <h4 class="text-primary">{{ product.price }} €</h4>
-                        <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn btn-dark w-100 mt-2">Ajouter au panier</a>
-                    </div>
+        <div class="carousel-inner rounded-3 shadow-sm">
+            <div class="carousel-item active bg-black text-light" style="height: 360px;">
+                <div class="h-100 d-flex flex-column justify-content-center align-items-start text-start p-5">
+                    <h2 class="hero-title display-5 fw-bold text-uppercase mb-3">Move with style</h2>
+                    <p class="lead mb-4">
+                        Des silhouettes épurées, pensées pour la performance au quotidien.
+                    </p>
+                    <a href="{{ path('app_product_index') }}" class="btn btn-light btn-lg text-uppercase fw-semibold">
+                        Découvrir la boutique
+                    </a>
                 </div>
             </div>
-        {% else %}
-            <div class="col-12">
-                <p class="text-center">Aucun produit trouvé.</p>
+
+            <div class="carousel-item bg-light" style="height: 360px;">
+                <div class="h-100 d-flex flex-column justify-content-center align-items-start text-start p-5">
+                    <h2 class="hero-title display-6 fw-bold text-uppercase mb-3">Nouvelle collection streetwear</h2>
+                    <p class="lead mb-4 text-muted">
+                        Jeans, sweats et sneakers pensés pour le mouvement.
+                    </p>
+                    <a href="{{ path('app_product_index') }}" class="btn btn-outline-dark btn-lg text-uppercase fw-semibold">
+                        Voir les nouveautés
+                    </a>
+                </div>
             </div>
-        {% endfor %}
+
+            <div class="carousel-item bg-white" style="height: 360px;">
+                <div class="h-100 d-flex flex-column justify-content-center align-items-start text-start p-5">
+                    <h2 class="hero-title display-6 fw-bold text-uppercase mb-3">Membre du club</h2>
+                    <p class="lead mb-4 text-muted">
+                        Profite d’offres exclusives et d’accès anticipés aux drops.
+                    </p>
+                    <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg text-uppercase fw-semibold">
+                        Rejoindre maintenant
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
     </div>
-</div>
+
+    {# Bandeau avantages #}
+    <section id="infos" class="mb-5">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <h3 class="h6 text-uppercase fw-bold mb-1">Livraison rapide</h3>
+                <p class="text-muted small mb-0">Expédition 24/48h sur une large sélection d’articles.</p>
+            </div>
+            <div class="col-md-4">
+                <h3 class="h6 text-uppercase fw-bold mb-1">Paiement sécurisé</h3>
+                <p class="text-muted small mb-0">Transactions protégées et plusieurs moyens de paiement.</p>
+            </div>
+            <div class="col-md-4">
+                <h3 class="h6 text-uppercase fw-bold mb-1">Retour facile</h3>
+                <p class="text-muted small mb-0">Retour sous 30 jours sur les produits éligibles.</p>
+            </div>
+        </div>
+    </section>
+
+    {# Grille produits #}
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h4 text-uppercase fw-bold mb-0">Nouveautés</h2>
+            <a href="{{ path('app_product_index') }}" class="text-decoration-none small text-uppercase fw-semibold">
+                Voir tous les produits →
+            </a>
+        </div>
+
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 220px;">
+                            <span class="text-muted text-uppercase small">
+                                {{ product.image ? product.image : 'Visuel à venir' }}
+                            </span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-uppercase fw-bold">{{ product.name }}</h5>
+                            <p class="card-text text-muted small flex-grow-1">
+                                {{ product.description|default('')|length > 110
+                                    ? product.description|slice(0, 110) ~ '...'
+                                    : product.description }}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <span class="fw-bold fs-5">{{ product.price }} €</span>
+                                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn btn-sm btn-dark text-uppercase fw-semibold">
+                                    Ajouter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center text-muted">Aucun produit trouvé pour le moment.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

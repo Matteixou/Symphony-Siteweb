@@ -1,19 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription - Mon E‑Shop{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="h4 mb-3 text-center">Créer un compte</h1>
 
-    {{ form_errors(registrationForm) }}
+                {# Si ton contrôleur envoie un objet de formulaire nommé "registrationForm" #}
+                {{ form_start(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                    {# Champs rendus avec le thème Bootstrap 5 #}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Mot de passe'
+                    }) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                    {# Exemple si tu as une case à cocher "conditions" #}
+                    {% if registrationForm.agreeTerms is defined %}
+                        {{ form_row(registrationForm.agreeTerms) }}
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-primary w-100 mt-2">
+                        S’inscrire
+                    </button>
+                {{ form_end(registrationForm) }}
+
+                <p class="text-center mt-3 mb-0">
+                    Déjà un compte ?
+                    <a href="{{ path('app_login') }}">Se connecter</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
