@@ -3,7 +3,7 @@
 {% block title %}Accueil - Mon E‑Shop{% endblock %}
 
 {% block body %}
-    {# Carrousel héro plein écran de largeur #}
+    {# Carrousel héro #}
     <div id="homeCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -14,11 +14,11 @@
         <div class="carousel-inner rounded-3 shadow-sm">
             <div class="carousel-item active bg-black text-light" style="height: 360px;">
                 <div class="h-100 d-flex flex-column justify-content-center align-items-start text-start p-5">
-                    <h2 class="hero-title display-5 fw-bold text-uppercase mb-3">Move with style</h2>
+                    <h2 class="display-5 fw-bold text-uppercase mb-3">Move with style</h2>
                     <p class="lead mb-4">
                         Des silhouettes épurées, pensées pour la performance au quotidien.
                     </p>
-                    <a href="{{ path('app_product_index') }}" class="btn btn-light btn-lg text-uppercase fw-semibold">
+                    <a href="{{ path('app_product_index') }}" class="btn btn-light btn-lg text-uppercase fw-semibold btn-hover-transition">
                         Découvrir la boutique
                     </a>
                 </div>
@@ -26,11 +26,11 @@
 
             <div class="carousel-item bg-light" style="height: 360px;">
                 <div class="h-100 d-flex flex-column justify-content-center align-items-start text-start p-5">
-                    <h2 class="hero-title display-6 fw-bold text-uppercase mb-3">Nouvelle collection streetwear</h2>
+                    <h2 class="display-6 fw-bold text-uppercase mb-3">Nouvelle collection streetwear</h2>
                     <p class="lead mb-4 text-muted">
                         Jeans, sweats et sneakers pensés pour le mouvement.
                     </p>
-                    <a href="{{ path('app_product_index') }}" class="btn btn-outline-dark btn-lg text-uppercase fw-semibold">
+                    <a href="{{ path('app_product_index') }}" class="btn btn-outline-dark btn-lg text-uppercase fw-semibold btn-hover-transition">
                         Voir les nouveautés
                     </a>
                 </div>
@@ -38,11 +38,11 @@
 
             <div class="carousel-item bg-white" style="height: 360px;">
                 <div class="h-100 d-flex flex-column justify-content-center align-items-start text-start p-5">
-                    <h2 class="hero-title display-6 fw-bold text-uppercase mb-3">Membre du club</h2>
+                    <h2 class="display-6 fw-bold text-uppercase mb-3">Membre du club</h2>
                     <p class="lead mb-4 text-muted">
                         Profite d’offres exclusives et d’accès anticipés aux drops.
                     </p>
-                    <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg text-uppercase fw-semibold">
+                    <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg text-uppercase fw-semibold btn-hover-transition">
                         Rejoindre maintenant
                     </a>
                 </div>
@@ -89,7 +89,7 @@
         <div class="row">
             {% for product in products %}
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0 shadow-sm">
+                    <div class="card h-100 border-0 shadow-sm card-hover">
                         <div class="bg-light d-flex align-items-center justify-content-center" style="height: 220px;">
                             <span class="text-muted text-uppercase small">
                                 {{ product.image ? product.image : 'Visuel à venir' }}
@@ -104,7 +104,7 @@
                             </p>
                             <div class="d-flex justify-content-between align-items-center mt-2">
                                 <span class="fw-bold fs-5">{{ product.price }} €</span>
-                                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn btn-sm btn-dark text-uppercase fw-semibold">
+                                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn btn-sm btn-dark text-uppercase fw-semibold btn-hover-transition">
                                     Ajouter
                                 </a>
                             </div>

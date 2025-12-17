@@ -5,9 +5,9 @@
 {% block body %}
 <div class="row justify-content-center mt-5">
     <div class="col-md-5">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h1 class="h4 mb-3 text-center">Connexion à votre compte</h1>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="h4 text-uppercase fw-bold text-center mb-4">Connexion</h1>
 
                 {% if error %}
                     <div class="alert alert-danger">
@@ -23,7 +23,7 @@
                 {% else %}
                     <form method="post">
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Email</label>
+                            <label for="inputEmail" class="form-label text-uppercase small fw-semibold">Email</label>
                             <input
                                 type="email"
                                 value="{{ last_username }}"
@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="inputPassword" class="form-label">Mot de passe</label>
+                            <label for="inputPassword" class="form-label text-uppercase small fw-semibold">Mot de passe</label>
                             <input
                                 type="password"
                                 name="password"
@@ -57,17 +57,17 @@
 
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" name="_remember_me" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">
+                            <label class="form-check-label small" for="rememberMe">
                                 Se souvenir de moi
                             </label>
                         </div>
 
-                        <button class="btn btn-primary w-100" type="submit">
+                        <button class="btn btn-dark w-100 text-uppercase fw-semibold btn-hover-transition" type="submit">
                             Se connecter
                         </button>
                     </form>
 
-                    <p class="text-center mt-3 mb-0">
+                    <p class="text-center mt-3 mb-0 small">
                         Pas encore de compte ?
                         <a href="{{ path('app_register') }}">Créer un compte</a>
                     </p>

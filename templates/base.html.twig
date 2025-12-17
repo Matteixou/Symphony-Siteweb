@@ -14,38 +14,55 @@
             :root {
                 --brand-accent: #0d6efd;
             }
+
             body {
                 background-color: #ffffff;
                 color: #111111;
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             }
-            .top-bar {
-                font-size: 0.8rem;
-                letter-spacing: .05em;
-                text-transform: uppercase;
-            }
-            .hero-title {
-                letter-spacing: .08em;
-            }
-            main {
-                min-height: 70vh;
-            }
-            .footer-title {
-                text-transform: uppercase;
-                font-size: 0.8rem;
-                letter-spacing: .12em;
-            }
+
             a {
                 text-decoration: none;
             }
             a:hover {
                 text-decoration: underline;
             }
+
+            .top-bar {
+                font-size: 0.8rem;
+                letter-spacing: .05em;
+                text-transform: uppercase;
+            }
+
+            main {
+                min-height: 70vh;
+            }
+
+            .footer-title {
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                letter-spacing: .12em;
+            }
+
+            /* Effets hover légers */
+            .card-hover {
+                transition: transform .2s ease, box-shadow .2s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 .5rem 1rem rgba(0,0,0,.12);
+            }
+            .btn-hover-transition {
+                transition: background-color .15s ease, color .15s ease, transform .15s ease;
+            }
+            .btn-hover-transition:hover {
+                transform: translateY(-1px);
+            }
         </style>
         {% endblock %}
     </head>
     <body>
-        {# barre fine en haut #}
+        {# Barre fine en haut #}
         <div class="top-bar bg-dark text-light py-1 d-none d-md-block">
             <div class="container d-flex justify-content-between align-items-center">
                 <div>
@@ -60,7 +77,7 @@
             </div>
         </div>
 
-        {# header principal #}
+        {# Header principal #}
         <header class="border-bottom bg-white">
             <div class="container py-3">
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
@@ -77,9 +94,9 @@
                     </form>
 
                     <div class="d-flex align-items-center gap-3">
-                        <a href="{{ path('app_cart') }}" class="btn btn-outline-dark position-relative">
+                        <a href="{{ path('app_cart') }}" class="btn btn-outline-dark position-relative btn-hover-transition">
                             🛒
-                            <span class="d-none d-lg-inline ms-1">Panier</span>
+                            <span class="d-none d-lg-inline ms-1 text-uppercase small fw-semibold">Panier</span>
                         </a>
                         {% if app.user %}
                             <a href="{{ path('app_profile') }}" class="text-dark small text-uppercase fw-semibold">
@@ -92,7 +109,7 @@
                             <a href="{{ path('app_login') }}" class="text-dark small text-uppercase fw-semibold">
                                 Connexion
                             </a>
-                            <a href="{{ path('app_register') }}" class="btn btn-dark btn-sm text-uppercase fw-semibold">
+                            <a href="{{ path('app_register') }}" class="btn btn-dark btn-sm text-uppercase fw-semibold btn-hover-transition">
                                 S’inscrire
                             </a>
                         {% endif %}
@@ -114,7 +131,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_product_index') }}">Boutique</a>
                             </li>
-                            {# lien admin #}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+                            </li>
+                            {# Lien admin (discret) #}
                             <li class="nav-item">
                                 <a class="nav-link text-muted" href="{{ path('app_product_index') }}">Admin produits</a>
                             </li>
@@ -156,7 +176,7 @@
                         </p>
                         <form class="d-flex gap-2">
                             <input type="email" class="form-control form-control-sm" placeholder="Ton email">
-                            <button class="btn btn-sm btn-light text-dark" type="submit">OK</button>
+                            <button class="btn btn-sm btn-light text-dark btn-hover-transition" type="submit">OK</button>
                         </form>
                         <div class="mt-3">
                             <div class="footer-title text-muted">Suivez‑nous</div>
