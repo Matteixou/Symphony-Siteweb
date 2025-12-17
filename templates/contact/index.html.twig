@@ -1,57 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contactez-nous{% endblock %}
+{% block title %}Contact - Mon E‑Shop{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            
-            {# Carte Bootstrap pour encadrer le formulaire #}
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0 text-center">Contactez-nous</h3>
-                </div>
-                
-                <div class="card-body p-4">
-                    
-                    {# Affichage des messages de succès #}
-                    {% for message in app.flashes('success') %}
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endfor %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <h1 class="h4 text-uppercase fw-bold mb-4">Contact</h1>
 
-                    <p class="text-muted mb-4 text-center">
-                        Une question ? Un problème ? Remplissez ce formulaire et nous vous répondrons rapidement.
-                    </p>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                {{ form_start(form) }}
 
-                    {{ form_start(form) }}
-                        
-                        {# Les champs s'afficheront maintenant avec le style Bootstrap #}
-                        <div class="mb-3">
-                            {{ form_row(form.name, {'attr': {'placeholder': 'Jean Dupont'}}) }}
-                        </div>
+                    {# Affichage standard des champs avec Bootstrap 5 #}
+                    {{ form_widget(form) }}
 
-                        <div class="mb-3">
-                            {{ form_row(form.email, {'attr': {'placeholder': 'jean@exemple.com'}}) }}
-                        </div>
+                    {# Bouton noir cohérent avec le reste du site #}
+                    <button type="submit" class="btn btn-dark mt-3 w-100 text-uppercase fw-semibold">
+                        Envoyer
+                    </button>
 
-                        <div class="mb-3">
-                            {{ form_row(form.message, {'attr': {'rows': 5, 'placeholder': 'Votre message ici...'}}) }}
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="bi bi-send"></i> Envoyer mon message
-                            </button>
-                        </div>
-
-                    {{ form_end(form) }}
-                </div>
+                {{ form_end(form) }}
             </div>
-
         </div>
     </div>
 </div>
