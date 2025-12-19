@@ -27,14 +27,13 @@ class RegistrationController extends AbstractController
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
-            // encode the plain password
+            // encoder le mot de passe en clair
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
-
+            // faites tout ce dont vous avez besoin ici, comme envoyer un e-mail
             return $security->login($user, AppAuthenticator::class, 'main');
         }
 

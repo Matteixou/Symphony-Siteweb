@@ -17,7 +17,7 @@ class OrderItemRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return OrderItem[] Returns an array of OrderItem objects
+//     * @return OrderItem[] Retourne un tableau d'objets OrderItem
 //     */
 //    public function findByExampleField($value): array
 //    {

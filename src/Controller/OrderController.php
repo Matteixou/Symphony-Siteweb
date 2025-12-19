@@ -20,14 +20,14 @@ class OrderController extends AbstractController
         EntityManagerInterface $em
     ): Response
     {
-        // 1. On vérifie que l'utilisateur est connecté
+        // On vérifie que l'utilisateur est connecté
         $user = $this->getUser();
         if (!$user) {
             // Si pas connecté, on renvoie vers la page de login
             return $this->redirectToRoute('app_login');
         }
 
-        // 2. On récupère le panier
+        // On récupère le panier
         $session = $requestStack->getSession();
         $cart = $session->get('cart', []);
 
@@ -36,7 +36,7 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('app_home'); // ou app_product_index selon tes routes
         }
 
-        // 3. On crée la commande (Order)
+        // On crée la commande (Order)
         $order = new Order();
         $order->setUser($user);
         $order->setCreatedAt(new \DateTimeImmutable());
@@ -46,7 +46,7 @@ class OrderController extends AbstractController
         // On dit à Doctrine de préparer la sauvegarde de la commande
         $em->persist($order);
 
-        // 4. On parcourt le panier pour créer les détails (OrderItem)
+        // On parcourt le panier pour créer les détails (OrderItem)
         foreach ($cart as $id => $quantity) {
             $product = $productRepository->find($id);
 
@@ -62,13 +62,13 @@ class OrderController extends AbstractController
             }
         }
 
-        // 5. On valide tout dans la base de données
+        //  On valide tout dans la base de données
         $em->flush();
 
-        // 6. On vide le panier de la session
+        // On vide le panier de la session
         $session->remove('cart');
 
-        // 7. On redirige vers une page de succès (ou la liste des commandes)
+        //  On redirige vers une page de succès (ou la liste des commandes)
         // Pour l'instant on va juste afficher un message simple
         $this->addFlash('success', 'Votre commande a bien été enregistrée !');
         return $this->redirectToRoute('app_home');
